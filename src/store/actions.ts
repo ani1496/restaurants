@@ -1,24 +1,9 @@
 import * as actionTypes from "./actionTypes"
-import { RestaurantsAction, Restaurant } from "../type"
 import { ThunkAction, ThunkDispatch } from "redux-thunk"
 import { ActionCreator, AnyAction } from "redux"
+import fetch from 'node-fetch'
 
-// export const addArticle = ( article: IArticle ) =>  {
-//     const action: ArticleAction = {
-//         type: actionTypes.ADD_ARTICLE,
-//         article,
-//     }
-
-//     return simulateHttpRequest(action)
-// }
-
-// export const simulateHttpRequest = (action: ArticleAction) => {
-// 	return (dispatch: DispatchType) => {
-// 		setTimeout(() => {
-// 			dispatch(action)
-// 		}, 500)
-// 	}
-// }
+import { RestaurantsAction, Restaurant } from "../type"
 
 export const getRestaurantsList: ActionCreator<
 	ThunkAction<
@@ -47,7 +32,47 @@ export const getRestaurantsList: ActionCreator<
 				genre: "Steak,American,Contemporary,Seafood,Cafe",
 				hours: "Open Daily 5:30 PM-10:00 PM",
 				attire: "business casual"
-		}]
+		}, 
+		{
+			id: "00b35e1a-82b1-4988-b8b9-6df826db2818",
+			name: "Matsuhisa",
+			address1: "303 E Main St",
+			city: "Aspen",
+			state: "CO",
+			zip: "81611",
+			lat: "39.190723",
+			long: "-106.82031",
+			telephone: "(970) 544-6628",
+			tags: "Social,Food and Dining,Restaurants,Japanese,Social,Food and Dining,Restaurants,Sushi",
+			website: "http://www.matsuhisaaspen.com",
+			genre: "Japanese,Sushi,Asian,Contemporary,Seafood",
+			hours: "Open Daily 5:30 PM-9:00 PM",
+			attire: "business casual"
+	},
+	{
+			id: "0f41a3d0-0641-4eef-b7fd-706f083cf0d5",
+			name: "Fleurie Restaurant",
+			address1: "108 3rd St NE",
+			city: "Charlottesville",
+			state: "VA",
+			zip: "22902",
+			lat: "38.030526",
+			long: "-78.479785",
+			telephone: "(434) 971-7800",
+			tags: "Social,Food and Dining,Restaurants,French",
+			website: "http://www.fleurierestaurant.com",
+			genre: "French,European,Cafe,Continental,American",
+			hours: "Mon-Thu 5:30 PM-9:00 PM; Fri-Sat 5:30 PM-10:00 PM",
+			attire: "business casual"
+		},]
+
+		// fetch("https://code-challenge.spectrumtoolbox.com/api/restaurants", {
+		// 	method: 'GET',
+		// 	headers: {'Authorization': 'Api-Key q3MNxtfep8Gt', 'Content-Type':'application/json'}
+		// } ).then(res => console.log(res.body)).catch(e => console.log(e))
+
+		// // console.log(data)
+
 		return dispatch({ type: actionTypes.GET_RESTAURANTS, restaurants })
 	}
 }

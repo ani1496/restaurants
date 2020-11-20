@@ -10,7 +10,7 @@ const initialState: GlobalState = {
 const reducer = ( state:GlobalState = initialState, action: Actions ) => {
   switch (action.type) {
     case GET_RESTAURANTS: 
-      return state;
+      return { ...state, restaurants: action.restaurants};
     default: return state;
   }
 }
