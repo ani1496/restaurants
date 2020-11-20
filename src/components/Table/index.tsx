@@ -1,9 +1,9 @@
 import React, { Dispatch, FunctionComponent, SetStateAction, useEffect, useState } from 'react'
 
 import Head from './Head';
-import { Restaurant } from "../../../type"
+import { Restaurant } from "../../type"
 
-import '../../../styles/Table.css'
+import '../../styles/Table.css'
 
 interface Props {
   restaurants: Restaurant[];
@@ -17,7 +17,7 @@ const Table:FunctionComponent<Props>= ({ restaurants, setRestaurants } ) => {
 
   return (
     <div className="margin-3">
-      <table className="table" id={restaurants[0].id}>
+      <table className="table" key={restaurants[0].id}>
         <Head restaurants={restaurants} setRestaurants={setRestaurants} />
         <tbody>
           {restaurants.map((restaurant:Restaurant) => {

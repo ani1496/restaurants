@@ -5,7 +5,7 @@ import { Restaurant } from "../type"
 import Header from './Header'
 
 import '../styles/index.css'
-import Home from './Home'
+import Table from './Table'
 
 const Main:FunctionComponent= () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
@@ -19,10 +19,12 @@ const Main:FunctionComponent= () => {
   return (
     <div>
       <Header />
-      <Home restaurants={restaurants} setRestaurants={(list) => {
+      <p>filters</p>
+      <Table restaurants={restaurants} setRestaurants={setRestaurants}/>
+      {/* <Home restaurants={restaurants} setRestaurants={(list) => {
         console.log('LIST', list)
         setRestaurants(list)
-      }}/>
+      }}/> */}
     </div>
   )
 }

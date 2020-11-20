@@ -2,10 +2,10 @@ import React, { FunctionComponent, Dispatch, useState, SetStateAction } from 're
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort } from '@fortawesome/free-solid-svg-icons';
 
-import { Restaurant } from "../../../type"
-import { sortAZRestaurants, sortZARestaurants } from '../../../methods';
+import { Restaurant } from "../../type"
+import { sortAZRestaurants, sortZARestaurants } from '../../methods';
 
-import '../../../styles/Table.css'
+import '../../styles/Table.css'
 
 interface Props {
   restaurants: Restaurant[];
@@ -29,7 +29,7 @@ const Head:FunctionComponent<Props>= ({ restaurants, setRestaurants }) => {
             sortAZRestaurants('name', restaurants) : 
             sortZARestaurants('name', restaurants)
 
-            setRestaurants(rest)
+          setRestaurants(rest)
           setSortName(!sortName)
         }}>
           <FontAwesomeIcon icon={faSort} />
@@ -46,7 +46,7 @@ const Head:FunctionComponent<Props>= ({ restaurants, setRestaurants }) => {
               sortAZRestaurants('state', restaurants) : 
               sortZARestaurants('state', restaurants)
 
-              setRestaurants(rest)
+            setRestaurants(rest)
             setSortState(!sortState)
           }}
         >

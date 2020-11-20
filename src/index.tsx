@@ -4,9 +4,7 @@ import { createStore, applyMiddleware, Store, AnyAction} from "redux"
 import thunk, { ThunkDispatch } from "redux-thunk"
 import { Provider } from "react-redux"
 
-// import Header from './components/Header'
-// import Home from './components/Home'
-import Main from './components'
+import Main from './components/Main'
 import reducer from "./store/reducer"
 import { Actions, GlobalState } from './type'
 
