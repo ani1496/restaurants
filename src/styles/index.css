@@ -62,3 +62,8 @@ code {
 .align-center {
   align-self: center;
 }
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}

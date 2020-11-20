@@ -18,3 +18,11 @@
   background-color: #F89070;
   color: white;
 }
+
+.sort-icon {
+  all: unset;
+  color: white;
+  opacity: 0.7;
+  padding-right: 10px;
+  cursor: pointer;
+}
