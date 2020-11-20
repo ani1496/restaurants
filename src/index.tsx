@@ -1,21 +1,23 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { createStore, applyMiddleware, Store } from "redux"
+import { createStore, applyMiddleware, Store, AnyAction} from "redux"
+import thunk, { ThunkDispatch } from "redux-thunk"
 import { Provider } from "react-redux"
-import thunk from "redux-thunk"
 
-import App from './components/App'
+import Header from './components/Header'
+import Home from './components/Home'
 import reducer from "./store/reducer"
-import { ArticleState, ArticleAction, DispatchType } from './type'
+import { Actions, GlobalState } from './type'
 
 import './styles/index.css'
 
-const store: Store <ArticleState, ArticleAction> & { dispatch: DispatchType } = 
+const store: Store <GlobalState, Actions> & { dispatch: ThunkDispatch<{}, {}, AnyAction> } = 
   createStore(reducer, applyMiddleware(thunk))
 
 render(
   <Provider store={store}>
-    <App />
+    <Header />
+    <Home />
   </Provider>,
   document.getElementById('root')
 )

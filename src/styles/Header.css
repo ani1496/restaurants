@@ -1,0 +1,16 @@
+.Header {
+  background-color: #F87C56;
+  color: white;
+  margin: unset;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.SearchBar-input {
+  all: unset;
+}
+
+.SearchBar-input::placeholder {
+  color: white;
+}

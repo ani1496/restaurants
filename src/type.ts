@@ -1,18 +1,53 @@
+import { Action } from "redux";
 import "webrtc";
 
-export interface IArticle {
-		id: number
-		title: string
-		body: string
+/// Example:
+
+
+// export interface IArticle {
+// 		id: number
+// 		title: string
+// 		body: string
+// }
+
+// export type ArticleState = {
+// 	ariticles: IArticle[]
+// }
+
+// export type ArticleAction = {
+// 	type: string
+// 	article: IArticle
+// }
+
+// export type DispatchType = (arg: ArticleAction) => ArticleAction
+
+
+//////
+
+export interface Restaurant {
+	id: string ,
+	name: string,
+	address1: string,
+	city: string,
+	state: string,
+	zip: string,
+	lat: string,
+	long: string,
+	telephone: string,
+	tags: string,
+	website: string,
+	genre: string,
+	hours: string,
+	attire: string,
 }
 
-export type ArticleState = {
-	ariticles: IArticle[]
+export interface GlobalState {
+	restaurants: Restaurant[],
+	filters: string[],
 }
 
-export type ArticleAction = {
-	type: string
-	article: IArticle
+export interface RestaurantsAction extends Action<"GET_RESTAURANTS"> {
+	restaurants: Restaurant[]
 }
 
-export type DispatchType = (arg: ArticleAction) => ArticleAction
+export type Actions = RestaurantsAction

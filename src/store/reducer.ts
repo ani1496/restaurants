@@ -1,28 +1,15 @@
-import { ADD_ARTICLE, REMOVE_ARTICLE } from './actionTypes'
-import {ArticleState, ArticleAction } from "../type";
+import { GET_RESTAURANTS } from './actionTypes'
+import { GlobalState, Actions } from "../type";
+// import { Reducer } from 'react';
 
-const initialState: ArticleState = {
-  ariticles: [
-    {
-        id: 1,
-        title: "post 1",
-        body:
-          "Quisque cursus, metus vitae pharetra Nam libero tempore, cum soluta nobis est eligendi",
-      },
-      {
-        id: 2,
-        title: "post 2",
-        body:
-          "Harum quidem rerum facilis est et expedita distinctio quas molestias excepturi sint",
-      },
-  ]
+const initialState: GlobalState = {
+  restaurants: [],
+  filters: [],
 }
 
-const reducer = ( state: ArticleState = initialState, action: ArticleAction ): ArticleState => {
+const reducer = ( state:GlobalState = initialState, action: Actions ) => {
   switch (action.type) {
-    case ADD_ARTICLE: 
-      return state;
-    case REMOVE_ARTICLE: 
+    case GET_RESTAURANTS: 
       return state;
     default: return state;
   }
