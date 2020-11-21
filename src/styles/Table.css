@@ -2,6 +2,7 @@
   border-collapse: collapse;
   border-spacing: unset;
   background: white;
+  width: 100%;
 }
 
 .table-tr {

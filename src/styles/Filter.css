@@ -1,0 +1,11 @@
+.clear-button {
+  all: unset;
+  cursor: pointer;
+  text-decoration: underline;
+  color: #F87C56;
+}
+
+.filter-input {
+  all: unset;
+  color: #F87C56;
+}

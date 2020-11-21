@@ -5,15 +5,20 @@ import { Order, Restaurant, SortBy } from "../type"
 import Header from './Header'
 
 import '../styles/index.css'
-import Table from './Table'
+import Table from './Table/Table'
 import TableRow from './Table/TableRow'
-import { sortAZRestaurants, sortZARestaurants } from '../methods'
+import { getGenres, sortAZRestaurants, sortZARestaurants } from '../methods'
+import Filters from './Filters/Filters'
 
 const Main:FunctionComponent= () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
+  const [genres, setGenres] = useState<string[]>([])
   
   useEffect(()=>{
     setRestaurants(mockData)
+    
+    const newGenres = getGenres(mockData)
+    setGenres([...newGenres])
   }, [])
 
   const sortRestaurants = (sortBy:SortBy, order:Order) => {
@@ -28,7 +33,7 @@ const Main:FunctionComponent= () => {
   return (
     <div>
       <Header />
-      <p>filters</p>
+      <Filters genres={genres}/>
       <Table sortRestaurants={sortRestaurants}>
         {restaurants.map(rest => <TableRow key={rest.id} {...rest}/>)}
       </Table>

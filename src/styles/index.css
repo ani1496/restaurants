@@ -17,6 +17,18 @@ code {
     monospace;
 }
 
+button {
+  all: unset;
+}
+
+.orange {
+  color: #F87C56;
+}
+
+.white {
+  color: white;
+}
+
 .orange-light {
   color: #F89070;
 }
@@ -25,8 +37,25 @@ code {
   background-color: #F89070;
 }
 
+.white-light-background {
+  background-color:white;
+}
+
 .margin-1 {
   margin: 5px;
+}
+
+.margin-1-tb {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.margin-1-r {
+  margin-right: 5px;
+}
+
+.margin-1-l {
+  margin-left: 5px;
 }
 
 .margin-2 {
@@ -41,6 +70,10 @@ code {
   padding: 5px;
 }
 
+.pad-1-b {
+  padding-bottom: 5px;
+}
+
 .pad-1-l {
   padding-left: 5px;
 }
@@ -51,6 +84,14 @@ code {
 
 .pad-2 {
   padding: 10px;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.width-50 {
+  width: 50%;
 }
 
 
