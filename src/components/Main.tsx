@@ -1,30 +1,37 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 
 import mockData from './mock'
-import { Restaurant } from "../type"
+import { Order, Restaurant, SortBy } from "../type"
 import Header from './Header'
 
 import '../styles/index.css'
 import Table from './Table'
+import TableRow from './Table/TableRow'
+import { sortAZRestaurants, sortZARestaurants } from '../methods'
 
 const Main:FunctionComponent= () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
   
   useEffect(()=>{
-    if(restaurants.length === 0) {
-      setRestaurants(mockData)
-    }
+    setRestaurants(mockData)
   }, [])
+
+  const sortRestaurants = (sortBy:SortBy, order:Order) => {
+    let sortedRests = [];
+
+    if (order === 'AZ') sortedRests = sortAZRestaurants(sortBy, restaurants)
+    else sortedRests = sortZARestaurants(sortBy, restaurants)
+
+    setRestaurants([...sortedRests])
+  }
 
   return (
     <div>
       <Header />
       <p>filters</p>
-      <Table restaurants={restaurants} setRestaurants={setRestaurants}/>
-      {/* <Home restaurants={restaurants} setRestaurants={(list) => {
-        console.log('LIST', list)
-        setRestaurants(list)
-      }}/> */}
+      <Table sortRestaurants={sortRestaurants}>
+        {restaurants.map(rest => <TableRow key={rest.id} {...rest}/>)}
+      </Table>
     </div>
   )
 }

@@ -1,38 +1,23 @@
-import React, { Dispatch, FunctionComponent, SetStateAction, useEffect, useState } from 'react'
+import React, { FunctionComponent } from 'react'
 
 import Head from './Head';
-import { Restaurant } from "../../type"
 
 import '../../styles/Table.css'
+import { Order, SortBy } from '../../type';
 
 interface Props {
-  restaurants: Restaurant[];
-  setRestaurants: Dispatch<SetStateAction<Restaurant[]>>
+  sortRestaurants: (sortBy:SortBy, order:Order) => void;
 }
 
-const Table:FunctionComponent<Props>= ({ restaurants, setRestaurants } ) => {
-  console.log('Table', restaurants)
-  
-  if (restaurants.length === 0) return <p>No Restaurants found at the moment</p>
+const Table:FunctionComponent<Props>= (props) => {
+  const { sortRestaurants } = props
 
   return (
     <div className="margin-3">
-      <table className="table" key={restaurants[0].id}>
-        <Head restaurants={restaurants} setRestaurants={setRestaurants} />
+      <table className="table">
+        <Head sortRestaurants={sortRestaurants} />
         <tbody>
-          {restaurants.map((restaurant:Restaurant) => {
-            const {id, name, genre, hours, city, state, address1, telephone } = restaurant
-
-            return (
-              <tr className="table-tr" key={id}>
-                <td className="pad-2">{name}</td>
-                <td className="pad-2">{genre}</td>
-                <td className="pad-2">{hours}</td>
-                <td className="pad-2">{`${address1}, ${city}, ${state}`}</td>
-                <td className="pad-2">{telephone}</td>
-              </tr>
-            )
-          })}
+          {props.children}
         </tbody>
       </table>
     </div>

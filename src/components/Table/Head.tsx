@@ -1,20 +1,19 @@
-import React, { FunctionComponent, Dispatch, useState, SetStateAction } from 'react'
+import React, { FunctionComponent, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort } from '@fortawesome/free-solid-svg-icons';
 
-import { Restaurant } from "../../type"
-import { sortAZRestaurants, sortZARestaurants } from '../../methods';
+import { Order, SortBy } from "../../type"
+
 
 import '../../styles/Table.css'
 
 interface Props {
-  restaurants: Restaurant[];
-  setRestaurants: Dispatch<SetStateAction<Restaurant[]>>
+  sortRestaurants: (sortBy:SortBy, order:Order) => void;
 }
 
-const Head:FunctionComponent<Props>= ({ restaurants, setRestaurants }) => {
-  const [sortName, setSortName] = useState(true)
-  const [sortState, setSortState] = useState(true)
+const Head:FunctionComponent<Props>= ({ sortRestaurants }) => {
+  const [sortName, setSortName] = useState<Order>('ZA')
+  const [sortState, setSortState] = useState<Order>('ZA')
 
   return (
     <thead className="table-header">
@@ -24,14 +23,10 @@ const Head:FunctionComponent<Props>= ({ restaurants, setRestaurants }) => {
         <button 
           className="sort-icon"
           onClick={() => {
-            console.log('Clicking')
-          const rest = sortName ? 
-            sortAZRestaurants('name', restaurants) : 
-            sortZARestaurants('name', restaurants)
-
-          setRestaurants(rest)
-          setSortName(!sortName)
-        }}>
+            const order = sortName === 'AZ' ? 'ZA' : 'AZ'
+            sortRestaurants('name', order)
+            setSortName(order)
+          }}>
           <FontAwesomeIcon icon={faSort} />
         </button>
       </th>
@@ -42,12 +37,9 @@ const Head:FunctionComponent<Props>= ({ restaurants, setRestaurants }) => {
         <button 
           className="sort-icon"
           onClick={() => {
-            const rest = sortState ? 
-              sortAZRestaurants('state', restaurants) : 
-              sortZARestaurants('state', restaurants)
-
-            setRestaurants(rest)
-            setSortState(!sortState)
+            const order = sortState === 'AZ' ? 'ZA' : 'AZ'
+            sortRestaurants('state', order)
+            setSortState(order)
           }}
         >
           <FontAwesomeIcon icon={faSort} />
