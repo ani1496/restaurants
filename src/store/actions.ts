@@ -13,8 +13,6 @@ export const getRestaurantsList: ActionCreator<
 		RestaurantsAction
 	>
 > = () => {
-	// add async when calling api
-	// add promise to first argument of ThunkAction Promise<RestaurantsAction>
 
 	return (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
 		const restaurants:Restaurant[] = [{
@@ -65,13 +63,6 @@ export const getRestaurantsList: ActionCreator<
 			hours: "Mon-Thu 5:30 PM-9:00 PM; Fri-Sat 5:30 PM-10:00 PM",
 			attire: "business casual"
 		},]
-
-		// fetch("https://code-challenge.spectrumtoolbox.com/api/restaurants", {
-		// 	method: 'GET',
-		// 	headers: {'Authorization': 'Api-Key q3MNxtfep8Gt', 'Content-Type':'application/json'}
-		// } ).then(res => console.log(res.body)).catch(e => console.log(e))
-
-		// // console.log(data)
 
 		return dispatch({ type: actionTypes.GET_RESTAURANTS, restaurants })
 	}

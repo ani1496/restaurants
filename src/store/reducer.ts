@@ -1,6 +1,5 @@
 import { GET_RESTAURANTS } from './actionTypes'
 import { GlobalState, Actions } from "../type";
-// import { Reducer } from 'react';
 
 const initialState: GlobalState = {
   restaurants: [],

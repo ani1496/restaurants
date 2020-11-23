@@ -16,6 +16,7 @@ const Main:FunctionComponent= () => {
   const [showRestaurants, setShowRestaurants] = useState<Restaurant[]>([])
   const [genres, setGenres] = useState<string[]>([])
   const [states, setStates] = useState<string[]>([])
+  const [page, setPage] = useState(0)
 
   const getData = async () => { 
     const res = await fetch("https://code-challenge.spectrumtoolbox.com/api/restaurants", {
@@ -27,15 +28,30 @@ const Main:FunctionComponent= () => {
   }
 
   const updateRestaurants = (filters:FiltersState) => {
-    setFilteredRestaurants(getRestaurantsFiltered(filters, restaurants))
+    const updatedRestaurants = getRestaurantsFiltered(filters, restaurants)
+    setFilteredRestaurants(updatedRestaurants)
+    setShowRestaurants([...updatedRestaurants].splice(0,10))
+    setPage(0)
   }
 
-  const onPageChange = (fromPage:number) => {
-    const showNewRestaurants = [...filteredRestaurants].splice(fromPage,10)
+  const onPageChange = (newPage:number) => {
+    const showNewRestaurants = [...filteredRestaurants].splice(newPage*10,10)
 
+    setPage(newPage)
     setShowRestaurants(showNewRestaurants)
   }
   
+  const sortRestaurants = (sortType:SortType, order:Order) => {
+    let sortedRests = [];
+
+    if (order === 'AZ') sortedRests = sortAZRestaurants(sortType, filteredRestaurants)
+    else sortedRests = sortZARestaurants(sortType, filteredRestaurants)
+
+    setFilteredRestaurants([...sortedRests])
+    setShowRestaurants([...sortedRests].splice(0,10))
+    setPage(0)
+  }
+
   useEffect(()=>{
     getData().then((data) => {
 
@@ -52,15 +68,6 @@ const Main:FunctionComponent= () => {
 
   }, [])
 
-  const sortRestaurants = (sortType:SortType, order:Order) => {
-    let sortedRests = [];
-
-    if (order === 'AZ') sortedRests = sortAZRestaurants(sortType, restaurants)
-    else sortedRests = sortZARestaurants(sortType, restaurants)
-
-    setRestaurants([...sortedRests])
-  }
-
   return (
     <div>
       <Header />
@@ -68,7 +75,11 @@ const Main:FunctionComponent= () => {
       <Table sortRestaurants={sortRestaurants}>
         {showRestaurants.map(rest => <TableRow key={rest.id} {...rest}/>)}
       </Table>
-      <Pagination filteredRestaurants={filteredRestaurants} onPageChange={onPageChange} />
+      <Pagination 
+        page={page}
+        filteredRestaurants={filteredRestaurants}
+        onPageChange={onPageChange}
+      />
     </div>
   )
 }

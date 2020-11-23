@@ -19,10 +19,15 @@ const TableRow:FunctionComponent<Props>= ({
 } ) => (
   <tr className="table-tr" key={id}>
     <td className="pad-2">{name}</td>
-    <td className="pad-2">{genre}</td>
-    <td className="pad-2">{hours}</td>
-    <td className="pad-2">{`${address1}, ${city}, ${state}, ${zip}`}</td>
-    <td className="pad-2">{telephone}</td>
+    <td className="pad-2">{genre.split(",").join(", ")}</td>
+    <td className="pad-2" style={{ whiteSpace: 'break-spaces' }}>
+      {hours.split("; ").join("\n")}
+    </td>
+    <td className="pad-2">
+      {`${address1}, `}
+      <p>{`${city}, ${state}, ${zip}`}</p>
+    </td>
+    <td className="pad-2" style={{ whiteSpace: 'nowrap' }}>{telephone}</td>
   </tr>
 )
 

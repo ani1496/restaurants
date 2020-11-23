@@ -1,29 +1,6 @@
 import { Action } from "redux";
 import "webrtc";
 
-/// Example:
-
-
-// export interface IArticle {
-// 		id: number
-// 		title: string
-// 		body: string
-// }
-
-// export type ArticleState = {
-// 	ariticles: IArticle[]
-// }
-
-// export type ArticleAction = {
-// 	type: string
-// 	article: IArticle
-// }
-
-// export type DispatchType = (arg: ArticleAction) => ArticleAction
-
-
-//////
-
 export interface Restaurant {
 	id: string ,
 	name: string,

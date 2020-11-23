@@ -7,27 +7,13 @@ import { Restaurant } from '../type'
 import '../styles/Pagination.css'
 
 interface Props {
+  page: number,
+  onPageChange: (page:number) => void
   filteredRestaurants: Restaurant[]
-  onPageChange: (fromPage:number) => void
 }
 
-const Pagination:FunctionComponent<Props> = ({filteredRestaurants, onPageChange }) => {
-  const [page, setPage] = useState(0)
+const Pagination:FunctionComponent<Props> = ({page, onPageChange, filteredRestaurants }) => {
   const maxPage = ~~(filteredRestaurants.length / 10)
-
-  const showMoreRestaurants = () => {
-    const newPage = page + 1
-    
-    onPageChange(newPage*10)
-    setPage(newPage)
-  }
-
-  const showLessRestaurants = () => {
-    const newPage = page - 1
-    
-    onPageChange(newPage*10)
-    setPage(newPage)
-  }
 
   return (
     <div className="row margin-2" style={{ justifyContent: 'flex-end' }}>
@@ -40,14 +26,14 @@ const Pagination:FunctionComponent<Props> = ({filteredRestaurants, onPageChange 
       <button
         className="pad-1-r show-more-less-button"
         disabled={page === 0}
-        onClick={showLessRestaurants}
+        onClick={() => onPageChange(page - 1)}
       >
         <FontAwesomeIcon icon={faAngleLeft} size="2x" />
       </button>
       <button
         className="pad-1-r show-more-less-button"
         disabled={page === maxPage}
-        onClick={showMoreRestaurants}
+        onClick={() => onPageChange(page + 1)}
       >
         <FontAwesomeIcon icon={faAngleRight} size="2x" />
       </button>
