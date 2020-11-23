@@ -3,10 +3,10 @@ import React, { FunctionComponent } from 'react'
 import Head from './Head';
 
 import '../../styles/Table.css'
-import { Order, SortBy } from '../../type';
+import { Order, SortType } from '../../type';
 
 interface Props {
-  sortRestaurants: (sortBy:SortBy, order:Order) => void;
+  sortRestaurants: (sortType:SortType, order:Order) => void;
 }
 
 const Table:FunctionComponent<Props>= (props) => {

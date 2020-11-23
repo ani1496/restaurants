@@ -2,13 +2,13 @@ import React, { FunctionComponent, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort } from '@fortawesome/free-solid-svg-icons';
 
-import { Order, SortBy } from "../../type"
+import { Order, SortType } from "../../type"
 
 
 import '../../styles/Table.css'
 
 interface Props {
-  sortRestaurants: (sortBy:SortBy, order:Order) => void;
+  sortRestaurants: (sortType:SortType, order:Order) => void;
 }
 
 const Head:FunctionComponent<Props>= ({ sortRestaurants }) => {

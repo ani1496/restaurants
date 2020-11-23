@@ -1,4 +1,4 @@
-import { Restaurant } from "./type";
+import { FiltersState, FilterType, Restaurant } from "./type";
 
 
 type sortType = 'name' | 'state'
@@ -39,6 +39,16 @@ export const getGenres = (restaurants:Restaurant[]) => {
   return genres
 }
 
+export const getStates = (restaurants:Restaurant[]) => {
+  const states:string[] = []
+  
+  restaurants.forEach(({state}) => {
+    if(!states.includes(state)) states.push(state)
+  })
+
+  return states
+}
+
 export const filterTags = (filterVal:string, tagOptions:string[], existingTags:string[]) => {
   if(filterVal.length === 0 ) return []
 
@@ -47,4 +57,26 @@ export const filterTags = (filterVal:string, tagOptions:string[], existingTags:s
   })
 
   return filterTags
+}
+
+export const getRestaurantsFiltered = (filters:FiltersState, restaurants:Restaurant[]) => {
+  let restaurantsFiltered:Restaurant[] = [...restaurants]
+  
+  Object.entries(filters).forEach((filter) => {
+    const [type, tags] = filter
+    restaurantsFiltered = filterRestaurants(type as FilterType, tags, restaurantsFiltered)
+  })
+
+  return restaurantsFiltered
+}
+
+const filterRestaurants = (filterBy:FilterType, filterVals:string[], restaurants:Restaurant[]) => {
+  
+  const restaurantsFiltered = restaurants.filter((restaurant:Restaurant) => {
+    const restFilterByArray = restaurant[filterBy].split(',')
+
+    return !filterVals.map(filterVal => restFilterByArray.includes(filterVal)).includes(false)
+  })
+
+  return restaurantsFiltered
 }

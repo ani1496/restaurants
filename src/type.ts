@@ -53,6 +53,13 @@ export interface RestaurantsAction extends Action<"GET_RESTAURANTS"> {
 export type Actions = RestaurantsAction
 
 
-export type SortBy = 'name' | 'state'
+export type SortType = 'name' | 'state'
 
 export type Order = 'ZA' | 'AZ'
+
+export type FilterType = 'genre' | 'state'
+
+export type FiltersState = {
+	genre: string[],
+	state: string[],
+}

@@ -2,13 +2,16 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 
 import Tag from './Tag'
 import { filterTags } from '../../methods'
+import { FilterType } from '../../type'
 
 type Props = {
-  type: string
+  type: FilterType
   tagOptions: string[]
+  onFilterChange: (filterType:FilterType, filterVals:string[]) => void;
+  className: string
 }
 
-const Filter:FunctionComponent<Props> = ({type, tagOptions}) => {
+const Filter:FunctionComponent<Props> = ({ type, tagOptions, onFilterChange, className }) => {
   const [filterVal, setFilterVal] = useState('')
   const [tags, setTags] = useState<string[]>([])
   const [tagsFound, setTagsFound] = useState<string[]>([])
@@ -16,10 +19,15 @@ const Filter:FunctionComponent<Props> = ({type, tagOptions}) => {
   const removeTag = (tagToRemove:string) => {
     const newTags = tags.filter((tag) => tag !== tagToRemove)
     setTags(newTags)
+    onFilterChange(type, newTags)
   }
 
   const addTag = (newTag:string) => {
-    if(!tags.includes(newTag)) setTags([...tags, newTag])
+    if(!tags.includes(newTag)) { 
+      const newTags = [...tags, newTag]
+      setTags(newTags)
+      onFilterChange(type, newTags)
+    }
     setFilterVal('')
   }
 
@@ -28,12 +36,12 @@ const Filter:FunctionComponent<Props> = ({type, tagOptions}) => {
   }, [filterVal])
 
   return (
-    <div className="orange-light-background width-50 row">
+    <div className={`orange-light-background width-50 row ${className}`}>
       <p className="white pad-2">{type}</p>
       <div className="width-100 height-auto margin-1">
         <div className="white-light-background pad-1-l row height-100">
           {
-            tags.map(tag => <Tag name={tag} onClick={(tag) => removeTag(tag)} />)
+            tags.map(tag => <Tag key={tag} name={tag} onClick={(tag) => removeTag(tag)} />)
           }
           <input
             className="filter-input"

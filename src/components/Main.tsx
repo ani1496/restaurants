@@ -1,17 +1,17 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 
-import mockData from './mock'
-import { Order, Restaurant, SortBy } from "../type"
+import { FiltersState, Order, Restaurant, SortType } from "../type"
 import Header from './Header'
 
 import '../styles/index.css'
 import Table from './Table/Table'
 import TableRow from './Table/TableRow'
-import { getGenres, sortAZRestaurants, sortZARestaurants } from '../methods'
+import { getRestaurantsFiltered, getGenres, getStates, sortAZRestaurants, sortZARestaurants } from '../methods'
 import Filters from './Filters/Filters'
 
 const Main:FunctionComponent= () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
+  const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>([])
   const [genres, setGenres] = useState<string[]>([])
   const [states, setStates] = useState<string[]>([])
 
@@ -24,23 +24,31 @@ const Main:FunctionComponent= () => {
     
     return await res.json()
   }
+
+  const updateRestaurants = (filters:FiltersState) => {
+    setFilteredRestaurants(getRestaurantsFiltered(filters, restaurants))
+  }
   
   useEffect(()=>{
     getData().then((data) => {
 
       setRestaurants(data)
+      setFilteredRestaurants(data)
+
       const newGenres = getGenres(data)
-      // const newStates = getAddessStates(mockData)
       setGenres([...newGenres])
+      
+      const newState = getStates(data)
+      setStates([...newState])
     })
 
   }, [])
 
-  const sortRestaurants = (sortBy:SortBy, order:Order) => {
+  const sortRestaurants = (sortType:SortType, order:Order) => {
     let sortedRests = [];
 
-    if (order === 'AZ') sortedRests = sortAZRestaurants(sortBy, restaurants)
-    else sortedRests = sortZARestaurants(sortBy, restaurants)
+    if (order === 'AZ') sortedRests = sortAZRestaurants(sortType, restaurants)
+    else sortedRests = sortZARestaurants(sortType, restaurants)
 
     setRestaurants([...sortedRests])
   }
@@ -48,9 +56,9 @@ const Main:FunctionComponent= () => {
   return (
     <div>
       <Header />
-      <Filters genres={genres}/>
+      <Filters genres={genres} states={states} updateRestaurants={updateRestaurants} />
       <Table sortRestaurants={sortRestaurants}>
-        {restaurants.map(rest => <TableRow key={rest.id} {...rest}/>)}
+        {filteredRestaurants.map(rest => <TableRow key={rest.id} {...rest}/>)}
       </Table>
     </div>
   )
