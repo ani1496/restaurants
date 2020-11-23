@@ -8,13 +8,14 @@ import Table from './Table/Table'
 import TableRow from './Table/TableRow'
 import { getRestaurantsFiltered, getGenres, getStates, sortAZRestaurants, sortZARestaurants } from '../methods'
 import Filters from './Filters/Filters'
+import Pagination from './Pagination'
 
 const Main:FunctionComponent= () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>([])
+  const [showRestaurants, setShowRestaurants] = useState<Restaurant[]>([])
   const [genres, setGenres] = useState<string[]>([])
   const [states, setStates] = useState<string[]>([])
-
 
   const getData = async () => { 
     const res = await fetch("https://code-challenge.spectrumtoolbox.com/api/restaurants", {
@@ -28,12 +29,19 @@ const Main:FunctionComponent= () => {
   const updateRestaurants = (filters:FiltersState) => {
     setFilteredRestaurants(getRestaurantsFiltered(filters, restaurants))
   }
+
+  const onPageChange = (fromPage:number) => {
+    const showNewRestaurants = [...filteredRestaurants].splice(fromPage,10)
+
+    setShowRestaurants(showNewRestaurants)
+  }
   
   useEffect(()=>{
     getData().then((data) => {
 
       setRestaurants(data)
       setFilteredRestaurants(data)
+      setShowRestaurants(data.splice(0, 10))
 
       const newGenres = getGenres(data)
       setGenres([...newGenres])
@@ -58,8 +66,9 @@ const Main:FunctionComponent= () => {
       <Header />
       <Filters genres={genres} states={states} updateRestaurants={updateRestaurants} />
       <Table sortRestaurants={sortRestaurants}>
-        {filteredRestaurants.map(rest => <TableRow key={rest.id} {...rest}/>)}
+        {showRestaurants.map(rest => <TableRow key={rest.id} {...rest}/>)}
       </Table>
+      <Pagination filteredRestaurants={filteredRestaurants} onPageChange={onPageChange} />
     </div>
   )
 }
