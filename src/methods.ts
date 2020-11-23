@@ -38,3 +38,13 @@ export const getGenres = (restaurants:Restaurant[]) => {
 
   return genres
 }
+
+export const filterTags = (filterVal:string, tagOptions:string[], existingTags:string[]) => {
+  if(filterVal.length === 0 ) return []
+
+  const filterTags = tagOptions.filter(tag => {
+    return tag.toLowerCase().includes(filterVal.toLowerCase()) && !existingTags.includes(tag)
+  })
+
+  return filterTags
+}

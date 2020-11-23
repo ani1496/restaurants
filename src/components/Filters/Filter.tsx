@@ -1,5 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
+
 import Tag from './Tag'
+import { filterTags } from '../../methods'
 
 type Props = {
   type: string
@@ -8,32 +10,28 @@ type Props = {
 
 const Filter:FunctionComponent<Props> = ({type, tagOptions}) => {
   const [filterVal, setFilterVal] = useState('')
-  const [tags, setTags] = useState<string[]>(['test', 'test2'])
+  const [tags, setTags] = useState<string[]>([])
   const [tagsFound, setTagsFound] = useState<string[]>([])
 
   const removeTag = (tagToRemove:string) => {
-    console.log(tagToRemove)
     const newTags = tags.filter((tag) => tag !== tagToRemove)
     setTags(newTags)
   }
 
+  const addTag = (newTag:string) => {
+    if(!tags.includes(newTag)) setTags([...tags, newTag])
+    setFilterVal('')
+  }
+
   useEffect(() => {
-    let filterTags:string[] = []
-
-    if(filterVal.length === 0 ) filterTags = []
-
-    else filterTags = tagOptions.filter(tag => tag.toLowerCase().includes(filterVal.toLowerCase()))
-    
-    setTagsFound([...filterTags]);
-  }, [tagOptions, filterVal])
-
-  console.log(tagsFound)
+    setTagsFound([...filterTags(filterVal, tagOptions, tags)]);
+  }, [filterVal])
 
   return (
     <div className="orange-light-background width-50 row">
       <p className="white pad-2">{type}</p>
-      <div>
-        <div className="width-100 white-light-background margin-1 pad-1-l row">
+      <div className="width-100 height-auto margin-1">
+        <div className="white-light-background pad-1-l row height-100">
           {
             tags.map(tag => <Tag name={tag} onClick={(tag) => removeTag(tag)} />)
           }
@@ -44,8 +42,8 @@ const Filter:FunctionComponent<Props> = ({type, tagOptions}) => {
             />
         </div>
         {tagsFound.length > 0 && 
-          <div>
-            {tagsFound.map(tag => <p>{tag}</p>)}
+          <div className="filter-dropdown">
+            {tagsFound.map(tag => <p key={tag} className="pad-1 dropdrown-tag" onClick={() => addTag(tag)}>{tag}</p>)}
           </div>
         }
       </div>

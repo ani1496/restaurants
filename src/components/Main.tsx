@@ -13,12 +13,27 @@ import Filters from './Filters/Filters'
 const Main:FunctionComponent= () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
   const [genres, setGenres] = useState<string[]>([])
+  const [states, setStates] = useState<string[]>([])
+
+
+  const getData = async () => { 
+    const res = await fetch("https://code-challenge.spectrumtoolbox.com/api/restaurants", {
+			method: 'GET',
+			headers: {'Authorization': 'Api-Key q3MNxtfep8Gt', 'Content-Type':'application/json'}
+    } )
+    
+    return await res.json()
+  }
   
   useEffect(()=>{
-    setRestaurants(mockData)
-    
-    const newGenres = getGenres(mockData)
-    setGenres([...newGenres])
+    getData().then((data) => {
+
+      setRestaurants(data)
+      const newGenres = getGenres(data)
+      // const newStates = getAddessStates(mockData)
+      setGenres([...newGenres])
+    })
+
   }, [])
 
   const sortRestaurants = (sortBy:SortBy, order:Order) => {

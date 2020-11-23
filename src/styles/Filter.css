@@ -8,4 +8,16 @@
 .filter-input {
   all: unset;
   color: #F87C56;
+  width: -webkit-fill-available;
+}
+
+.filter-dropdown {
+  position: absolute;
+  background-color: #fefdf9f1;
+  min-width: 35%;
+  z-index: 1;
+}
+
+.dropdrown-tag:hover {
+  background-color: #FCB39C;
 }
