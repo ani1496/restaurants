@@ -4,10 +4,14 @@ import SearchBar from './SearchBar'
 
 import '../../styles/Header.css'
 
-const Header:FunctionComponent = () => (
+interface Props {
+  onSearch: (searchVal:string) => void;
+}
+
+const Header:FunctionComponent<Props> = ({ onSearch }) => (
   <div className="Header pad-2">
     <p className="align-center">DINE ME</p>
-    <SearchBar/>
+    <SearchBar onSearch={onSearch}/>
   </div>
 )
 

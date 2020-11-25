@@ -21,6 +21,20 @@ button {
   all: unset;
 }
 
+@media (min-width: 768px) {
+  .container {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+
+@media (min-width: 375px) {
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
 .orange {
   color: #F87C56;
 }
@@ -64,6 +78,10 @@ button {
 
 .margin-3 {
   margin: 15px;
+}
+
+.margin-4 {
+  margin: 50px;
 }
 
 .pad-1 {
@@ -118,4 +136,8 @@ button {
 .space-between {
   display: flex;
   justify-content: space-between;
+}
+
+.text-align {
+  text-align: center;
 }

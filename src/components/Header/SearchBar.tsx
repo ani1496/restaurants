@@ -1,21 +1,37 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-const SearchBar:FunctionComponent = () => {
-  const [seachVal, setSearchVal] = useState("")
+interface Props {
+  onSearch: (searchVal:string) => void;
+}
+
+const SearchBar:FunctionComponent<Props> = ({onSearch}) => {
+  const [searchVal, setSearchVal] = useState('')
+
+  useEffect(() => {
+    setSearchVal('')
+  }, [])
 
   return (
-    <div className="orange-light-background pad-1 row">
+    <form 
+      className="orange-light-background pad-1 row"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSearch(searchVal)
+      }} 
+    >
       <input
         className="SearchBar-input"
         type="text"
         placeholder="Search"
-        value={seachVal}
+        value={searchVal}
         onChange={(e) => setSearchVal(e.target.value)}
       />
-      <FontAwesomeIcon icon={faSearch} />
-    </div>
+      <button type="submit">
+        <FontAwesomeIcon icon={faSearch} />
+      </button>
+    </form>
   )
 }
 

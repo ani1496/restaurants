@@ -27,7 +27,6 @@ const Filters:FunctionComponent<Props> = ({ genres, states, updateRestaurants })
     <div className="margin-3">
       <div className="row space-between pad-1-b">
         <p className="orange">Filters:</p>
-        <button className="clear-button orange">Clear</button>
       </div>
       <div className="row">
         <Filter type="genre" tagOptions={genres} onFilterChange={onFilterChange} className="margin-1-r" />

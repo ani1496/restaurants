@@ -80,3 +80,17 @@ const filterRestaurants = (filterBy:FilterType, filterVals:string[], restaurants
 
   return restaurantsFiltered
 }
+
+export const searchRestaurants = (searchVal:string, restaurants:Restaurant[]) => {
+  const restaurantsFound = restaurants.filter((restaurant:Restaurant) => {
+    const hasName:boolean = restaurant.name.toLowerCase().includes(searchVal.toLowerCase())
+    const hasCity:boolean = restaurant.city.toLowerCase().includes(searchVal.toLowerCase())
+    const hasGenre:boolean = restaurant.genre.toLowerCase().includes(searchVal.toLowerCase())
+
+    return hasName || hasCity || hasGenre
+  })
+
+  console.log('searchRestaurants', [...restaurantsFound])
+  
+  return [...restaurantsFound]
+}

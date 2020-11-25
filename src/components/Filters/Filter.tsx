@@ -35,6 +35,12 @@ const Filter:FunctionComponent<Props> = ({ type, tagOptions, onFilterChange, cla
     setTagsFound([...filterTags(filterVal, tagOptions, tags)]);
   }, [filterVal])
 
+  useEffect(() => {
+    setFilterVal('')
+    setTags([])
+    setTagsFound([])
+  }, [tagOptions])
+
   return (
     <div className={`orange-light-background width-50 row ${className}`}>
       <p className="white pad-2" style={{ textTransform: 'capitalize' }}>{type}</p>
