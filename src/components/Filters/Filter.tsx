@@ -43,7 +43,7 @@ const Filter:FunctionComponent<Props> = ({ type, tagOptions, onFilterChange, cla
 
   return (
     <div className={`orange-light-background width-50 row ${className}`}>
-      <p className="white pad-2" style={{ textTransform: 'capitalize' }}>{type}</p>
+      <p className="white pad-2 capitalize">{type}</p>
       <div className="width-100 height-auto margin-1">
         <div className="white-light-background pad-1-l row height-100">
           {

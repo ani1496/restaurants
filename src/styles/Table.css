@@ -8,6 +8,7 @@
 .table-tr {
   font-size: 15px;
   border-bottom: 0.5px solid #ECECEC;
+  cursor: pointer;
 }
 
 .table-tr:hover {

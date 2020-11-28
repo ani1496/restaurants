@@ -104,7 +104,20 @@ button {
   padding: 10px;
 }
 
+.pad-2-t {
+  padding-top: 10px;
+}
+
+.pad-2-b {
+  padding-bottom: 10px;
+}
+
 .pad-2-r {
+  padding-right: 10px;
+}
+
+.pad-2-lr {
+  padding-left: 10px;
   padding-right: 10px;
 }
 
@@ -140,4 +153,8 @@ button {
 
 .text-align {
   text-align: center;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
