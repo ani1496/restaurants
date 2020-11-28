@@ -5,10 +5,14 @@
   color: #F87C56;
 }
 
+.filter-content {
+  flex-flow: wrap;
+}
+
 .filter-input {
   all: unset;
   color: #F87C56;
-  width: -webkit-fill-available;
+  /* width: -webkit-fill-available; */
 }
 
 .filter-dropdown {

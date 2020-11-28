@@ -42,10 +42,10 @@ const Filter:FunctionComponent<Props> = ({ type, tagOptions, onFilterChange, cla
   }, [tagOptions])
 
   return (
-    <div className={`orange-light-background width-50 row ${className}`}>
+    <div className={`orange-light-background width-50 row fit-content ${className}`}>
       <p className="white pad-2 capitalize">{type}</p>
       <div className="width-100 height-auto margin-1">
-        <div className="white-light-background pad-1-l row height-100">
+        <div className="filter-content white-light-background pad-1-l row height-100">
           {
             tags.map(tag => <Tag key={tag} name={tag} onClick={(tag) => removeTag(tag)} />)
           }
@@ -53,7 +53,7 @@ const Filter:FunctionComponent<Props> = ({ type, tagOptions, onFilterChange, cla
             className="filter-input"
             value={filterVal}
             onChange={(e) => setFilterVal(e.target.value)}
-            />
+          />
         </div>
         {tagsFound.length > 0 && 
           <div className="filter-dropdown">
