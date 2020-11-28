@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react'
 
 import '../../styles/Table.css'
-import { Restaurant } from '../../type'
 
 interface Props {
   id: string ,

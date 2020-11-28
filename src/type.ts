@@ -1,4 +1,3 @@
-import { Action } from "redux";
 import "webrtc";
 
 export interface Restaurant {
@@ -17,18 +16,6 @@ export interface Restaurant {
 	hours: string,
 	attire: string,
 }
-
-export interface GlobalState {
-	restaurants: Restaurant[],
-	filters: string[],
-}
-
-export interface RestaurantsAction extends Action<"GET_RESTAURANTS"> {
-	restaurants: Restaurant[]
-}
-
-export type Actions = RestaurantsAction
-
 
 export type SortType = 'name' | 'state'
 
