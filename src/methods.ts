@@ -1,6 +1,5 @@
 import { FiltersState, FilterType, Restaurant } from "./type";
 
-
 type sortType = 'name' | 'state'
 
 export const sortAZRestaurants = (sortBy: sortType, restaurants: Restaurant[]) => {
@@ -89,8 +88,6 @@ export const searchRestaurants = (searchVal:string, restaurants:Restaurant[]) =>
 
     return hasName || hasCity || hasGenre
   })
-
-  console.log('searchRestaurants', [...restaurantsFound])
   
   return [...restaurantsFound]
 }
